@@ -1,0 +1,23 @@
+-- implem avec arduino + OV7670 + ESP8266
+-- non... utiliser une ESP32 et flasher du code arduino dessus
+
+-- l'implem de l'upload de la photo vers le serveur distant me demande trop de ressource dynamik
+-- mmhhhh, chercher une autre alternative sure
+
+-- ok, surement celle ci :
+une raspberrypi va se connecter au module esp32
+recuperer l'image
+la traiter par rapport a la precedente
+
+estimer s'il s'agit d'un nouveau colis ou pas
+notifier l'utilisateur via un tlegram-bot
+
+- la rasp doit faire :
+    - une evaluation de difference entre les images quelle recoit pour savoir 'il y'a quelque chose de nouveau dans la boite aux lettre
+    - une evaluation pour savoir s'i s'agit d'une pub ou autre chose
+    - et enfin me send un message telegram quand c'est confirmer que c un nouveau way que je viens de recevoir
+
+-- utiliser vscode instead of arduino IDE parck c mieux
+-- pour upload mon sketch : arduino-cli upload -p /dev/ttyUSB0 -b esp32:esp32:esp32cam .
+-- pour compiler : arduino-cli compile -b esp32:esp32:esp32cam .
+-- pour re-set le COM de sortie USB : sudo chown d4rk3r /dev/ttyUSB0

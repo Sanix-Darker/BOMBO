@@ -1,0 +1,1 @@
+./env/bin/python3 -m bot.main

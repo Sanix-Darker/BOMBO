@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/home/d4rk3r/Arduino/libraries/**",
+                "/home/d4rk3r/Arduino/libraries/**/**",
+                "/usr/include/X11/fonts",
+                "/home/d4rk3r/.arduino15/packages/**",
+                "/home/d4rk3r/Downloads/arduino-1.8.16/hardware/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
