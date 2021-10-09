@@ -52,7 +52,7 @@ WiFiClient client;
 
 // Replace with your network credentials
 const char* ssid = "Bbox-B24ECEC6";
-const char* password = "KvEuLJhby3Nhdq1Wxm";
+const char* password = "--------------------";
 
 // Take new photo boolean
 boolean takeNewPhoto = false;

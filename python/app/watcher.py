@@ -21,36 +21,41 @@ def watch():
     if not path.exists("./data"):
         makedirs("./data")
 
+    print("[-] BOMBO started...")
+    # A small wait
+    time.sleep(5)
+
     # An infinite loop for the BOMBO fetch of images
     while True:
-        print("[-] BOMBO started...")
+        try:
+            # let's take a picture...
+            save_photo(BEFORE)
 
-        # let's take a picture...
-        save_photo(BEFORE)
+            # then we wait 10 seconds (2 mins)
+            time.sleep(10)
 
-        # then we wait 120 seconds (2 mins)
-        time.sleep(120)
+            # let's take a picture...
+            save_photo(AFTER)
 
-        # let's take a picture...
-        save_photo(AFTER)
+            # Compute Structural similarity between two images
+            (score, diff) = compute_similarity()
+            print("[-] Percent of image similarity: ", score)
 
-        # Compute Structural similarity between two images
-        (score, diff) = compute_similarity()
-        print("[-] Percent of image similarity: ", score)
+            if score < 0.9:
+                status = send_telegram(
+                    f"Hey there, i Noticed something new in your "
+                    f'"boite aux lettres" with accuracy of {score * 100}%,'
+                    "\nhit /no if you want me to ignore or it's just a magazine,"
+                    "\n\nI need to confirm that because am continuously learning"
+                    " what can be a useless inbox/adds or what is a real new thing"
+                )
+                if not status[0]:
+                    print(f"[x] There was an error {status[1]}")
 
-        if score < 0.8:
-            status = send_telegram(
-                f"Hey there, i Noticed something new in your "
-                f'"boite aux lettres" with accuracy of {score*100}%,'
-                "\nhit /no if you want me to ignore or it's just a magazine,"
-                "\n\nI need to confirm that because am continuously learning"
-                " what can be a useless inbox/adds or what is a real new thing"
-            )
-            if not status[0]:
-                print(f"[x] There was an error {status[1]}")
-
-        # we wait a long time
-        time.sleep(randint(100, 500))
+            # we wait a long time
+            time.sleep(randint(10, 30))
+        except Exception as es:
+            pass
 
 
 def start_watch_thread(t: Thread):

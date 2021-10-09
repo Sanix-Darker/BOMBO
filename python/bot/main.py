@@ -13,7 +13,7 @@ def start_callback(bot, update):
 
     chat_id = update.message.chat_id
 
-    if chat_id != CHAT_ID:
+    if str(chat_id) != str(CHAT_ID):
         message = (
             "I don't know your chat-id, you should set it "
             "with the physical esp module first !"
@@ -40,7 +40,7 @@ def stop_callback(bot, update):
 
     chat_id = update.message.chat_id
 
-    if chat_id != CHAT_ID:
+    if str(chat_id) != str(CHAT_ID):
         message = (
             "I don't know your chat-id, you should set it "
             "with the physical esp module first !"
@@ -57,6 +57,19 @@ def stop_callback(bot, update):
         stop_watch_thread(T)
 
     bot.send_message(chat_id=chat_id, text="Hello there, \n" + message)
+
+
+def no_callback(bot, update):
+    print("[+] help-callback")
+    # TODO: the AI/ML/Learning service will be done for this callback in part 2
+    chat_id = update.message.chat_id
+
+    message = (
+        "'No' triggered, that means i should avoid next time "
+        "sending you notifications for something looking like that photo ! "
+    )
+
+    bot.send_message(chat_id=chat_id, text=message)
 
 
 def help_callback(bot, update):
@@ -79,6 +92,7 @@ def help_callback(bot, update):
 start_handler = CommandHandler("start", start_callback)
 stop_handler = CommandHandler("stop", stop_callback)
 help_handler = CommandHandler("help", help_callback)
+no_handler = CommandHandler("no", no_callback)
 
 updater = Updater(token=TOKEN)
 dispatcher = updater.dispatcher
@@ -86,6 +100,7 @@ dispatcher = updater.dispatcher
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(stop_handler)
 dispatcher.add_handler(help_handler)
+dispatcher.add_handler(no_handler)
 
 if __name__ == "__main__":
     updater.start_polling()
